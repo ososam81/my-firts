@@ -4,7 +4,7 @@ const app = express();
 //const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.json({ mensaje: '¡Hola desde tu API en Render!' });
+  res.json({ mensaje: '¡TESTER en Render!' });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
@@ -24,7 +24,7 @@ const SPARKPOST_API_KEY = '9ed4337ce18fded1109cf26f055b1ca8ff358a34';
 
 // Ruta raíz (opcional)
 app.get('/', (req, res) => {
-  res.json({ mensaje: '¡Hola desde tu API en Render!' });
+  res.json({ mensaje: '¡TESTER_ API_GO_Render!' });
 });
 
 // Ruta para consultar eventos de SparkPost
