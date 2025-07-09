@@ -1,52 +1,48 @@
-// index.js
-const express = require('express');
-const app = express();
-//const PORT = process.env.PORT || 3000;
+// Cargar variables de entorno desde .env
+require('dotenv').config();
 
-app.get('/', (req, res) => {
-  res.json({ mensaje: '¡TESTER en Render!' });
-});
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor escuchando en puerto ${PORT}`);
-});
-
-
+// Importar dependencias
 const express = require('express');
 const axios = require('axios');
+
+// Inicializar la aplicación de Express
 const app = express();
 
-// Puerto que usará Render (usa el que Render le asigna automáticamente)
+// Puerto que usará Render (asignado automáticamente)
 const PORT = process.env.PORT || 3000;
 
-// ?? Reemplaza esto con tu API KEY real de SparkPost
-const SPARKPOST_API_KEY = '9ed4337ce18fded1109cf26f055b1ca8ff358a34';
+// Obtener la API Key de SparkPost desde las variables de entorno
+const SPARKPOST_API_KEY = process.env.SPARKPOST_API_KEY;
 
 // Ruta raíz (opcional)
 app.get('/', (req, res) => {
-  res.json({ mensaje: '¡TESTER_ API_GO_Render!' });
+  res.json({ mensaje: '¡TESTER API en Render!' });
 });
 
 // Ruta para consultar eventos de SparkPost
 app.get('/spark-events', async (req, res) => {
   try {
+    // Llamada a la API de SparkPost para obtener eventos
     const response = await axios.get('https://api.sparkpost.com/api/v1/message-events', {
       headers: {
-        Authorization: SPARKPOST_API_KEY
+        Authorization: SPARKPOST_API_KEY // Autorización con la API Key
       },
       params: {
-        limit: 10 // Puedes cambiar este número o agregar filtros como "event"
+        limit: 10 // Limitar a 10 eventos (ajustar según sea necesario)
+        // Puedes agregar más filtros como 'event', 'from', 'to', etc.
       }
     });
 
+    // Responder con los eventos obtenidos de SparkPost
     res.json(response.data);
   } catch (error) {
-    console.error('Error al obtener eventos:', error.response?.data || error.message);
+    // Manejo de errores
+    console.error('Error al obtener los eventos de SparkPost:', error.message);
     res.status(500).json({ error: 'No se pudieron obtener los eventos de SparkPost.' });
   }
 });
 
-// Iniciar servidor
+// Iniciar servidor en el puerto especificado
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en puerto ${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
