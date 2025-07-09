@@ -1,0 +1,12 @@
+{
+  "name": "mi-api",
+  "version": "1.0.0",
+  "description": "API básica en Node.js para Render",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
